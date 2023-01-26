@@ -6,11 +6,29 @@ import sys
 
 # All menu's option.
 EXIT = 0
+GO_BACK = 5
 
 # Main menu options.
 MATRIX_OPS = 1
 PASS_OPS = 2
 STATE_INFO = 3
+
+# Matrix ops menu options.
+ADD = 1
+SUB = 2
+MUL = 3
+ELEM_BY_ELEM_MUL = 4
+
+# Password ops menu options.
+LOG_IN = 1
+CREATE_ACC = 2
+PASS_GO_BACK = 3
+
+# State info menu options.
+DISPLAY_INFO = 1
+SEARCH = 2
+TOP_5 = 3
+UPDATE = 4
 
 
 def main():
@@ -23,6 +41,13 @@ def main():
     print("Welcome to PyDemo, a program demonstrating some of the programming "
           "skills I have learned")
 
+    main_menu()
+
+
+def main_menu():
+    """
+    Print the main menu, loop and get the users menu selection.
+    """
     while True:
         # Print welcome statement to user.
         print("\nPlease enter what you would like to do: ")
@@ -43,16 +68,16 @@ def exec_main_menu(selection):
 
     :param selection: of the user.
     """
-    if selection == MATRIX_OPS:
+    if selection is MATRIX_OPS:
         matrix_ops()
 
-    if selection == PASS_OPS:
+    if selection is PASS_OPS:
         pass_ops()
 
-    if selection == STATE_INFO:
+    if selection is STATE_INFO:
         state_info()
 
-    if selection == EXIT:
+    if selection is EXIT:
         exit_program()
 
 
@@ -92,6 +117,42 @@ def matrix_ops():
     Sets up a menu of options to perform matrix calculations to add,
     subtract, matrix multiplication, and element-wise multiplication.
     """
+    while True:
+        # Print menu for the matrix operation.
+        print("\nMatrix operations menu:")
+        print("Enter 1 to add two matrices.")
+        print("Enter 2 to subtract two matrices.")
+        print("Enter 3 to multiply two matrices.")
+        print("Enter 4 to element by element multiplication for two matrices.")
+        print("Enter 5 to return to the main menu.")
+        print("Enter 0 to exit.")
+
+        # Get the users menu selection and execute its corresponding function.
+        exec_matrix_ops_sel(get_num_input(EXIT, GO_BACK))
+
+
+def exec_matrix_ops_sel(selection):
+    """
+    Executes the corresponding matrix operations menu function.
+
+    :param selection: of the user.
+    """
+    if selection is ADD:
+        pass
+
+    if selection is SUB:
+        pass
+
+    if selection is MUL:
+        pass
+
+    if selection is ELEM_BY_ELEM_MUL:
+        pass
+
+    if selection is GO_BACK:
+        main_menu()
+
+    exec_sub_menus_sel(selection)
 
 
 def pass_ops():
@@ -99,17 +160,91 @@ def pass_ops():
     Requests user to log in, validating the credentials. After log in allows
     encoding of a message.
     """
+    while True:
+        # Print menu.
+        print("\nPassword operations menu:")
+        print("Enter 1 to log in.")
+        print("Enter 2 to create an account.")
+        print("Enter 3 to return to the main menu.")
+        print("Enter 0 to exit.")
+
+        # Get the users menu selection and execute its corresponding function.
+        exec_pass_ops_sel(get_num_input(EXIT, PASS_GO_BACK))
+
+
+def exec_pass_ops_sel(selection):
+    """
+    Executes the corresponding password operations menu function.
+
+    :param selection: of the user.
+    """
+    if selection is LOG_IN:
+        pass
+
+    if selection is CREATE_ACC:
+        pass
+
+    if selection is PASS_GO_BACK:
+        main_menu()
+
+    exec_sub_menus_sel(selection)
 
 
 def state_info():
     """
-    Perform different US state information operations.
-
     Displays menu of options to: display the state, its capital, population,
     and flower, or modify the state population; search for a specific state's
     info; display the top 5 states by population; or update a specific state's
     population.
     """
+    while True:
+        # Print menu.
+        print("\nState info menu:")
+        print("Enter 1 to display all state information.")
+        print("Enter 2 to search for a specific state and display its information.")
+        print("Enter 3 to display the top 5 states with largest populations.")
+        print("Enter 4 update a state's population.")
+        print("Enter 5 to return to the main menu.")
+        print("Enter 0 to exit.")
+
+        # Get the users menu selection and execute its corresponding function.
+        exec_state_info_sel(get_num_input(EXIT, GO_BACK))
+
+
+def exec_state_info_sel(selection):
+    """
+    Executes the corresponding state info menu function.
+
+    :param selection: of the user.
+    """
+    if selection is DISPLAY_INFO:
+        pass
+
+    if selection is SEARCH:
+        pass
+
+    if selection is TOP_5:
+        pass
+
+    if selection is UPDATE:
+        pass
+
+    if selection is GO_BACK:
+        main_menu()
+
+    exec_sub_menus_sel(selection)
+
+
+def exec_sub_menus_sel(selection):
+    """
+    Executes the corresponding function selected. These options are found on
+    all sub menus.
+
+    :param selection: of the user.
+    """
+
+    if selection is EXIT:
+        exit_program()
 
 
 def exit_program():
