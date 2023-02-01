@@ -4,6 +4,9 @@ Performs the menu operations for the program.
 # For exit function.
 import sys
 
+import file_rw
+from state_info import *
+
 # All menu's option.
 EXIT = 0
 GO_BACK = 5
@@ -217,8 +220,14 @@ def exec_state_info_sel(selection):
 
     :param selection: of the user.
     """
+    # Read in and initialize state information.
+    info = StateInfo(file_rw.read(STATES_PATH),
+                     file_rw.read(CAPITALS_PATH),
+                     file_rw.read(POPULATIONS_PATH),
+                     file_rw.read(FLOWERS_PATH))
+
     if selection is DISPLAY_INFO:
-        pass
+        info.display_all_info()
 
     if selection is SEARCH:
         pass
