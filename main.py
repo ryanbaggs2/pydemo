@@ -3,9 +3,9 @@ Performs the menu operations for the program.
 """
 # For exit function.
 import sys
-
 import file_rw
-from state_info import *
+from state_info import StateInfo, STATES_PATH, CAPITALS_PATH, \
+    POPULATIONS_PATH, FLOWERS_PATH
 
 # All menu's option.
 EXIT = 0
