@@ -11,15 +11,18 @@ def write(data, path):
 
     :param data: to be written to a file.
     :param path: string path to the file "./data/example.json"
-    :return: FileNotFoundError.
+    :return: True if file is found.
+    :raise: FileNotFoundError.
     """
     # Check if file exists.
     if os.path.isfile(path):
         # Open the file and write data.
-        with open(path, 'w') as json_file:
+        with open(path, 'w', encoding='utf-8') as json_file:
             json.dump(data, json_file)
-    else:
-        return FileNotFoundError
+        # File found.
+        return True
+
+    raise FileNotFoundError
 
 
 def read(path):
@@ -27,12 +30,13 @@ def read(path):
     Reads from specified path and returns the data.
 
     :param path: string path to the file "./data/example.json"
-    :return: the data in the file or FileNotFoundError.
+    :return: data read from file.
+    :raise: FileNotFoundError.
     """
     # Check if file exists.
     if os.path.isfile(path):
         # Open the file and read data.
-        with open(path, 'r') as json_file:
+        with open(path, 'r', encoding='utf-8') as json_file:
             return json.load(json_file)
-    else:
-        return FileNotFoundError
+
+    raise FileNotFoundError
