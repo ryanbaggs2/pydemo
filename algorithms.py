@@ -29,7 +29,8 @@ def quicksort_and_runtime(data, start, end):
 
 def quicksort(data, start, end):
     """
-    Demonstration of the quick sort algorithm, recursively called.
+    Demonstration of the quick sort algorithm, recursively called. Sorts a list
+    in ascending order.
 
     :param data: the data or partition of data to be sorted.
     :param start: the start of the data or partition of data.
@@ -105,18 +106,92 @@ def swap_values(data, i, j):
     return data
 
 
-def merge_sort(data):
+def merge_sort_and_runtime(data):
     """
-    Demonstration of the merge sort algorithm
+    Demonstration of the merge sort algorithm including the runtime.
+    Sorts a list in ascending order.
 
     :param data: the data to be sorted.
-    :return: data and time in nanoseconds to perform the sort.
+    :return: sorted data and time in nanoseconds to perform the sort.
     """
     start_time = time.time_ns()
+
+    data = merge_sort(data)
 
     run_time = time.time_ns() - start_time
 
     return data, run_time
+
+
+def merge_sort(data):
+    """
+    Demonstration of the merge sort algorithm.
+    Split the list into sub lists no longer than one element, naively sorted.
+    Merge and sort the sub lists comparing two at a time.
+
+    :param data: as a list to be sorted.
+    :return: the merged and sorted data in ascending order.
+    """
+    # Base case, a single or no element list is naively sorted.
+    if len(data) <= 1:
+        return data
+
+    # Split the list into halves, until all sub-lists are one or zero elements.
+    first_half, second_half = split(data)
+    first = merge_sort(first_half)
+    second = merge_sort(second_half)
+
+    return merge(first, second)
+
+
+def split(data):
+    """
+    Splits a list into two sub-lists.
+
+    :param data: list to be split.
+    :return: two sub-lists divided at the midpoint.
+    """
+    # Find the midpoint of the list.
+    midpoint = math.floor(len(data) / 2)
+
+    # Return slices of list.
+    return data[:midpoint - 1], data[midpoint:]
+
+
+def merge(first, second):
+    """
+    Merges two sub-lists together into a single merged list.
+
+    :param first: sub-list.
+    :param second: sub-list.
+    :return: merged list in ascending order.
+    """
+    # Create empty list to store merged data.
+    merged = []
+    i = 0
+    j = 0
+
+    while i < len(first) and j < len(second):
+        if first[i] < second[j]:
+            # Append value and move on to next element in first list.
+            merged.append(first[i])
+            i += 1
+        else:
+            # Append value and move on to next element in second list.
+            merged.append(second[j])
+            j += 1
+
+    while i < len(first):
+        # First list is longer than second. Append rest of values to merged list.
+        merged.append(first[i])
+        i += 1
+
+    while j < len(second):
+        # Second list is longer than first. Append rest of values to merged list.
+        merged.append(second[j])
+        j += 1
+
+    return merged
 
 
 def linear_search(list_of_data, data):
@@ -155,7 +230,7 @@ def binary_search(list_of_data, data, sort_type):
 
     # Check the type of sorting to use.
     if sort_type == MERGE_SORT:
-        sorted_data = merge_sort(list_of_data)[0]
+        sorted_data = merge_sort_and_runtime(list_of_data)[0]
 
     if sort_type == QUICKSORT:
         sorted_data = quicksort(list_of_data, 0, list_of_data.len())[0]
