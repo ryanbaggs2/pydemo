@@ -16,7 +16,7 @@ class TestSortingAlgorithms(unittest.TestCase):
         """
         test_list = [10, 40, 30, 20, 60, 50]
 
-        self.assertEqual(algorithms.quicksort(test_list, 0, len(test_list))[0],
+        self.assertEqual(algorithms.quicksort(test_list, 0, len(test_list) - 1)[0],
                          sorted(test_list))
 
     def test_quicksort_empty_list(self):
