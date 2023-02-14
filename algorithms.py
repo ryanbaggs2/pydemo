@@ -3,6 +3,7 @@ Contains the searching and sorting algorithms used in the program.
 """
 import math
 import time
+import copy
 
 # Sorting types.
 MERGE_SORT = 1
@@ -33,8 +34,8 @@ def quicksort(data, start, end):
     in ascending order.
 
     :param data: the data or partition of data to be sorted.
-    :param start: the start of the data or partition of data.
-    :param end: the end of the data or partition of data.
+    :param start: the first index of the data or partition of data.
+    :param end: the last index of the data or partition of data.
     :return: data, start element, and end element.
     """
     # Recursively go until smallest partitions achieved.
@@ -43,7 +44,7 @@ def quicksort(data, start, end):
         pivot_index, data = move_elem_across_pivot(data, start, end)
 
         # Partition the data, continue quicksort.
-        quicksort(data, start, pivot_index)
+        quicksort(data, start, pivot_index - 1)
         quicksort(data, pivot_index + 1, end)
 
     return data, start, end
@@ -69,19 +70,20 @@ def move_elem_across_pivot(data, start, end):
     # Loop until in pivot location.
     while i < j:
         # Loop until value that should be swapped across pivot found.
-        while data[i] <= pivot:
+        while data[i] <= pivot and i is not end:
             i += 1
 
         # Loop until value that should be swapped across pivot found.
-        while data[j] > pivot:
+        while data[j] > pivot and j is not start:
             j -= 1
 
         # Check that not in pivot location.
         if i < j:
             data = swap_values(data, i, j)
 
-    # Move the pivot into its correct position.
-    swap_values(data, start, j)
+    if pivot > data[j]:
+        # Move the pivot into its correct position.
+        swap_values(data, start, j)
 
     return j, data
 
@@ -96,10 +98,10 @@ def swap_values(data, i, j):
     :return: the list with the elements swapped with each other.
     """
     # Create a temporary variable.
-    temp = data[i]
+    temp = copy.copy(data[i])
 
     # Swap the values between each other.
-    data[i] = data[j]
+    data[i] = copy.copy(data[j])
     data[j] = temp
 
     # Return the updated list.
