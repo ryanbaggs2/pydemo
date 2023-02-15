@@ -157,7 +157,7 @@ def split(data):
     midpoint = math.floor(len(data) / 2)
 
     # Return slices of list.
-    return data[:midpoint - 1], data[midpoint:]
+    return data[:midpoint], data[midpoint:]
 
 
 def merge(first, second):
