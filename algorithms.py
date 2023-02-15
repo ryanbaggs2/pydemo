@@ -232,7 +232,7 @@ def binary_search(list_of_data, data, sort_type):
 
     # Check the type of sorting to use.
     if sort_type == MERGE_SORT:
-        sorted_data = merge_sort_and_runtime(list_of_data)[0]
+        sorted_data = merge_sort(list_of_data)
 
     if sort_type == QUICKSORT:
         sorted_data = quicksort(list_of_data, 0, list_of_data.len())[0]
